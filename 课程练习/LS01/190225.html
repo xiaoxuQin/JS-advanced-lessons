@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+  <script type="text/javascript">
+
+		var username = "zhangsan";
+		var age = 18;
+		function setName(){
+			username = "lisi";
+		}
+		// setName();
+
+		function setAge(){
+			age = 20;
+		}
+
+		function setInfor(){
+			setName();
+			setAge();
+		}
+		setInfor();
+	</script>
+
+	<script>
+		var str = "";
+		if(str){
+			console.log("1");
+		}else{
+			console.log("2");
+		}
+		// 2
+
+		var str = "11";
+		if(str){
+			console.log("1");
+		}else{
+			console.log("2");
+		}
+		// 1
+// "" 里面是空格， 也就是 " " 的时候，同样打印出 1
+
+		var str2 = "1022a";
+		var t = parseInt(str2);
+		console.log(t);
+		// 1022
+
+		var b2 = 10 && false;
+		console.log(b2);
+		// false
+
+	</script>
+
+</body>
+</html>
