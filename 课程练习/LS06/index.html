@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LS03</title>
+    <!--<script src="./js/demo01.js"></script>-->
+    <!--<script src="./js/demo02.js"></script>-->
+    <!--<script src="./js/demo03.js"></script>-->
+    <!--<script src="./js/demo04.js"></script>-->
+</head>
+<body>
+    <script>
+        // 定义函数的形参和调用函数的实参个数可以不一致
+        function sum(x, y, z){
+            console.log(x, y, z);
+            // undefined undefined undefined
+            x = x;
+            y = y;
+            z = z;
+            return x + y + z;
+        }
+        console.log(sum());
+        // NaN
+
+        //////////////////////
+        function sum(x, y, z){
+            x = x || 1;
+            y = y || 2;
+            z = z || 3;
+            return x + y + z;
+        }
+        console.log(sum());        // 6
+        console.log(sum(4, 5, 6)); // 15 默认值不再起作用
+        
+
+        // ES6中设置函数默认值
+        function sum1(x, y = 2, z = 3){
+            return x + y + z;
+        }
+        sum1(1);   // 6
+    
+    </script>
+</body>
+</html>
