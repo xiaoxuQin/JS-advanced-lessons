@@ -114,39 +114,6 @@
         bar(obj);
     </script>
 
-    <script>
-        var obj = {"userName":"zhangsan", "age":20}
-    // 定义一个函数完成对变量的复制过程，
-    // 当成新的变量，并返回
-    // 引用类型时，数组、对象
-        function copyArg(arg1){
-            var copy;
-            switch(true){
-                case (arg1 instanceof String):
-                    copy = arg1;
-                    break;
-                case (arg1 instanceof Number):
-                    copy = arg1;
-                    break;
-                case (arg1 instanceof Boolean): 
-                    copy = arg1;
-                    break;
-                case (arg1 instanceof Array): 
-                    copy = [];
-                    for(var i = 0; i < arg1.length; i++){
-                        copy[i] = arg1[i];
-                    }
-                    break;
-            }
-        }    
-    </script>
-
-    <script>
-        var str = "abc";
-        console.log(str instanceof Object); //  false
-        var str = "abc";
-        var strObject = new Object(str);
-        console.log(strObject instanceof Object);     //  true
-    </script>
+   
 </body>
 </html>
