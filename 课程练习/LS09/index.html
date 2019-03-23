@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LS09</title>
+    <!--<script src="./js/demo01.js"></script>-->
+    <!--<script src="./js/demo02.js"></script>-->
+    <!--<script src="./js/demo03.js"></script>-->
+    <!--<script src="./js/demo04.js"></script>-->
+</head>
+
+<body>
+    <script>
+        ///////////////////////////////////////////////////////
+        console.log(a);
+        if (true) {
+            var a = 1;
+        }
+        console.log(a);
+        // undefined
+        // 1
+        ////////////////////////////////////////////////////////
+        foo();
+        console.log(foo);
+        // 报错 foo is not a function
+        // 这种情况时，仅会对变量进行定义的提升 
+        var foo = function () {
+            console.log("hello world");
+        }
+        foo();  // hello world
+        ///////////////////////////////////////////////////////
+        console.log(foo);
+        var foo = function () {
+            console.log("foo");
+        }
+        foo();
+        // undefined
+        // foo
+        ///////////////////////////////////////////////////////
+        AA();
+        function AA() {
+            console.log("AA_1");
+        }
+        var AA = function AA() {
+            console.log("AA_2");
+        };
+        AA();
+    // AA_1
+    // AA_2
+    //等价于
+        function AA(){
+            console.log("AA_1");
+        }
+        var AA;
+
+        AA();
+        AA = function AA(){
+            console.log("AA_2");
+        }
+        AA();
+
+    ///////////////////////////////////////////////////////
+
+    </script>
+</body>
+
+</html>
