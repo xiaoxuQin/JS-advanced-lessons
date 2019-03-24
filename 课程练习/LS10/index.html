@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ch_10</title>
+    <script src="demo01.js"></script>
+    <script src="demo02.js"></script>
+    <script src="demo04_1.js"></script>
+    <script src="demo04_2.js"></script>
+    <script src="demo05.js"></script>
+</head>
+<!-- demo04_1  demo04_2 demo05 均为实例 ！！！ -->
+<body>
+    <script>
+        // 变量和函数的可访问范围
+        var a = 1;
+        function fn1() {
+            console.log(a);
+            var b = 2;
+            var c = 3;
+            function fn2() {
+                // c = 30  不进行var , 当前作用域没有对c进行定义，就会把上层的c赋值为30
+                var c = 30;
+                var d = 4;
+                console.log(c);   // 30
+            }
+            fn2();
+            console.log(c);       // 3
+            console.log(d);       // (报错)d is not defined
+        }
+        fn2();      // 调用fn2()报错，它的作用范围就是fn1()这个函数
+        fn1();      // 1    30    3    (报错)d is not defined
+        // 找变量从内层向外层作用域找
+        // 预解析过程如下：：：
+        // function fn1(){
+        //     function fn2(){
+        //         var c;
+        //         var d;
+        //         c = 30;
+        //         d = 4;
+        //     }
+        //     var b;
+        //     var c;
+        //     b = 2;
+        //     c = 3;
+        // }
+
+        ///////////////////////////////////////////////////////
+        var username = "jack";
+        function foo() {
+            username = "bill";  // 这个位置没有var， 向上找，找到 jack
+            console.log(username);  // bill
+        }
+        function bar() {
+            var username = "mike";
+            foo();
+            console.log(username);  // mike
+        }
+        bar();      // bill  mike
+        console.log(username);  // bill   前面被更改了，foo（）里面给username赋值 没有用var
+        //////////////////////////////////////////////
+        //函数和变量在完成定义之后，作用域都是确定的，和调用形式没有关系
+        var username = "jack";
+        function foo() {
+            console.log(username);  // jack
+        }
+        function bar() {
+            var username = "mike";
+
+            console.log(username);  // mike
+        }
+        bar();
+        console.log(username);  // jack
+        /////////////////////////////////////////////////////////////
+        // ES5没有块级作用域，只有函数的局部作用域
+        if (true) {
+            var a = 2;
+        }
+        console.log(a);
+        //预解析：：：
+        var a;
+        if (true) {
+            a = 2;
+        }
+        console.log(a);
+
+        function fn1() {
+            //ES5就只有函数能限定变量的作用域
+        }
+
+        // ES6
+        if (true) {
+            let b = 3;
+        }
+        console.log(b);
+        // 报错 b is not defined
+
+        ////////////////////////////////////////////////////////
+        // 变量污染
+        var userId = 5;
+        document.onclick = function () {
+            console.log(userId);    // 5    10 10 10 10 10.......
+            userId = 10;
+        }
+        // 一大段代码。。。。。。
+        if (true) {
+            var userId = 30;
+        }
+        console.log(userId);    // 30
+
+        
+        // 一大段代码。。。。。。
+        (function () {
+            if (true) {
+                var userId = 30;
+            }
+        })()
+        console.log(userId);  // 5
+
+        ////////////////////////////////////////////////////////
+        // 上下文，当某行代码执行过程中，它的上下文环境，
+        // 当前作用域包含的变量、函数调用栈、this的指向
+        var x = 5;
+        var y = 6;
+        function foo() {
+            var a = 1;
+            var b = 2;
+            function bar() {
+                var c = 3;
+                var d = 4;
+            }
+            bar();
+        }
+        foo();
+
+    </script>
+</body>
+
+</html>
