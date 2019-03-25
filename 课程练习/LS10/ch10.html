@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="div1" style="width: 100px; height: 50px;"> </div>
+</body>
+<script>
+    var div1 = document.getElementById("div1");
+    var username = "zhangsan";
+    function foo() {
+        div1.onclick = function () {
+            this.innerHTML = username;
+        }
+    }
+// 全局变量会降低执行效率， 因为要内层逐层向上查找，因此我们希望作用域链尽可能短
+
+
+// 这样写window, document作为参数传递，并且使用function定义了作用域
+// 提高性能
+    (function (w, d) {
+        w.onlpad = function () {
+
+        }
+    })(window, document)
+
+</script>
+
+</html>
