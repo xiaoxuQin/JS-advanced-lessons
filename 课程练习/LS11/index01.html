@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ch_11</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //////////////////////////////////////////////
+    // 立即执行 形式：：：
+    // 解决变量污染（重名）， 变量共享，
+    // (function 函数名(参数) {
+    //     函数体
+    // }(实参))
+    (function max(x, y) {
+        return x > y ? x : y;
+    }(2, 3));
+
+    (function max(x, y) {
+        return x > y ? x : y;
+    })(2, 3);
+    //////////////////////////////////////////////
+    // 变量污染
+    var userId = 2;
+    document.onclick = function () {
+        alert(userId);
+    };
+    (function () {
+        if (true) {
+            var userId = 20;
+        }
+    })()
+    // 用这个来代替下面代码，防止变量污染
+    // if (true) {
+    //     var userId = 20;
+    // }
+
+    //////////////////////////////////////////////
+    // 变量共享
+    function foo() {
+        var arr1 = [];
+        for (var i = 0; i < 10; i++) {
+            arr1[i] = function () {
+                return i;
+            }
+            // 只是定义函数
+            // 把函数存入这个数组，等到函数执行的时候，循环结束， i = 10
+        }
+        return arr1;
+    }
+    var arr2 = foo();
+    arr2[0]();
+    // 10 
+    // 所有i值都是循环结束以后的i值
+
+    function foo() {
+        var arr1 = [];
+        for (var i = 0; i < 10; i++) {
+            arr1[i] = (function () {
+                return i;
+            })()
+        }
+        return arr1;
+    }
+    var arr2 = foo();
+    console.log(arr2);
+    // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    function foo() {
+        var arr1 = [];
+        for (var i = 0; i < 10; i++) {
+            // 形成10个作用域，作用域内的j值各不相同，并且不共享
+            (function (j) {
+                arr1[j] = function () {
+                    return j;
+                }
+            })(i)
+        }
+        return arr1;
+    }
+    var arr2 = foo();
+    arr2[3]();      // 3
+
+</script>
+
+</html>
