@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ch 12</title>
+</head>
+<body>
+</body>
+<script>
+    function fn1(){
+        var x = 1;
+    }
+    console.log(x);
+    // 报错，函数作用域，无法进行访问
+
+    // 方法一：
+    function fn1(){
+        var x = 1;
+        function fn2(){
+            return ++x;
+        }
+        return fn2();
+    }
+    fn1();
+
+    // 方法二：
+    function fn1(){
+        var x = 1;
+        function fn2(){
+            return ++x;
+        }
+        return fn2;
+    }
+    // console.log(fn1()());    // 2
+    var fn3 = fn1();
+    console.log(fn3()); // 2
+    console.log(fn3()); // 3
+    console.log(fn3()); // 4
+// 闭包： 
+// 通过返回函数（fn1）内部定义的函数（fn2），来访问fn1内部的局部变量（x）
+// 闭包是由函数(fn2)和与其相关的引用环境组合而成的实体(fn2函数 和 x 构成的实体)
+</script>
+
+<script>
+    function addNum(start){   // start 一直保留在内存当中
+        return function(step){
+            start += step;
+            return start;
+        }
+    }
+    var fn3 = addNum(10);
+    console.log(fn3(1)) ;
+    console.log(fn3(1)) ;
+    console.log(fn3(1)) ;
+    // 11 12 13
+// 闭包：函数（addNum）内部定义的函数（return 匿名函数）
+// 与其相关作用域中的变量（start）形成的实体
+// start 会一直保持在内存中，不会被释放
+</script>
+
+<script>
+    function foo(){
+        var i = 0;
+        function bar(){
+            console.log(++i);
+        }
+        return bar;
+    }
+    var fn1 = foo();
+    var fn2 = foo();
+    fn1();  // 1
+    fn1();  // 2
+    fn2();  // 1
+    fn1();  // 3
+</script>
+
+<script>
+/**  
+ * 闭包所带来的影响
+ * 1. 闭包让我们可以访问到函数内部定义的变量
+ * 2. 闭包让关联作用域中的特定变量保持在内存中，不释放
+ */
+</script>
+
+<script>
+    var tmp = 100;
+    function foo(x){
+        var tmp = 3;
+        return function(y){
+            console.log(x + y + (++tmp));
+        }
+    }
+    var fee = foo(2);
+    fee(10);    // 16
+    fee(10);    // 17
+    fee(10);    // 18
+</script>
+</html>
