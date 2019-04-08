@@ -1,0 +1,109 @@
+</<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ch_13 JS对象综述</title>
+</head>
+
+<body>
+    <script>
+        /*  
+            对象 instanceof 构造函数
+            1. 判断对象能否使用该构造函数实例化得到
+            2. 判断对象的原型链上能否找到该构造函数的原型
+            对象.__proto__.__proto__ （长度不确定）== 构造函数.prototype
+        */
+        console.log(Object instanceof Function);// true
+        // 只要是函数，它的原型链上就可以找到Function， Object可以看做是函数
+        console.log(Object.__proto__ == Function.prototype);    // true
+
+        console.log(Object instanceof Object);
+        // 所有对象 instanceof Object 都为true
+        console.log(Object.__proto__.__proto__ == Object.prototype);
+
+            // Math 和 JSON 不是以构造函数的形式出现的
+            // 他们两个 instanceof Function ==> false
+            //         instanceof Object ==> true
+    </script>
+
+    <script>
+        function Person(username, age) {
+            this.username = username;
+            this.age = age = age;
+        }
+        var p = new Person("zhangsan", 20);
+        console.log(p.__proto__ == Person.prototype);
+            // Person 由 Object 实例化得到， 一个链式的关系
+    </script>
+
+    <script>
+        var o = {
+            _x: 1,
+            get x() {
+                return this._x;
+            },
+            set x(val) {
+                this._x = val;
+            }
+        }
+        o.x = 10;
+        console.log(o.x, o._x);
+    </script>
+
+    <!--  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+    <!--  * * * * * 2019.04.08 * * * * *  -->
+
+    <script>
+        var obj = {
+            "x": 1,
+            "y": 2
+        }
+        var z = "age";
+        obj[z] = 20;    // {x: 1, y: 2, age: 20} 变量值作为对象属性
+        obj['z'] = 20;    // {x: 1, y: 2, z: 20} 变量作为对象属性
+        console.log(obj);
+    </script>
+
+    <script>
+        var obj = {
+            "username": "zhangsan",
+            "age": 20
+        }
+        var obj1 = Object.create(obj);
+        console.log(obj);   // {username: "zhangsan", age: 20}
+        console.log(obj1);  // {} 有 __proto__ 属性，打开有原型
+    </script>
+
+    <script>
+        function Person(username, age) {
+            this.username = username;
+            this.age = age;
+            // this.sayHi = function(){
+            //     console.log(this.username);
+            // }
+        }
+        Person.prototype.sayHi = function () {
+            console.log("hi");
+        }
+        var person1 = new Person("zhangsan", 20);
+        var person2 = new Person("lisi", 30);
+        console.log(person1.__proto__ == Person.prototype);     // true
+        console.log(person1.__proto__ == person2.__proto__);    // true
+    </script>
+
+    <script>
+        /*
+          1. var obj1 = {
+              属性名：属性值，
+              方法名：方法
+          }
+          2. var obj1 = {......};
+             var obj2 = Object.create(obj1);
+          3. function Person(){...};
+             var person1 = new Person();
+        */
+    </script>
+</body>
+
+</html>
