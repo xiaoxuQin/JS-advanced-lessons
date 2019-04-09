@@ -1,0 +1,59 @@
+</<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>h02_01</title>
+</head>
+<body>
+    <!-- 任务 02_01 -->
+    <script>    
+        function copyArr(arr){
+            var brr = new Array();
+            for(var i = 0; i < arr.length; i++){
+                var arrObject= new Object(arr[i]);
+                switch(true){
+                    case(arrObject instanceof String):
+                        brr[i] = arrObject.trim();
+                        break;
+                    case(arrObject instanceof Boolean):
+                        brr[i] = Number(arrObject);
+                        break;
+                    case(arrObject instanceof Number):
+                        brr[i] = Number(arrObject.toFixed(2));
+                        break;
+                }
+            }
+            console.log(brr);
+        }
+
+        copyArr(["  hello ", "world", false, true, 1.235, 1.422]);
+        // ["hello", "world", 0, 1, 1.24, 1.42]
+    </script>
+    
+    <!-- 任务 02_02 -->
+    <script>
+        function searchName(name){
+            var str = "赵钱孙李周吴郑王冯陈楮卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜";
+            var a = str.indexOf(name);
+            switch(true){
+                case(a == -1):
+                    console.log("该姓氏不存在");
+                    break;
+                case(a == 0):
+                    console.log(a + 1);
+                    console.log("该姓氏之前姓氏不存在");
+                    break;
+                default:
+                    console.log(a + 1);
+                    console.log(str.slice(0,a));
+            }
+        }
+        
+        searchName("秦");
+        // 18
+        // 赵钱孙李周吴郑王冯陈楮卫蒋沈韩杨朱
+    </script>
+
+
+</body>
+</html>
