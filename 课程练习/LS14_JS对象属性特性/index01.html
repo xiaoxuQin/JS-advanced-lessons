@@ -89,6 +89,82 @@
         obj.name = "lily";
         console.log(obj.name);  // lily
     </script>
+    
+    <!------------------  2019.04.12   ---------------------->
+    <script>
+        // 回顾
+        var obj = {x:0};
+        Object.defineProperty(obj, 'y', {
+            value: 1,
+            enumerable: true,
+            writable: true,
+            configurable: true
+        });
+        // Object.prototype();
+    </script>
+
+    <script>
+        // 属性特性描述符
+        var obj = { x: 0 };
+        Object.defineProperty(obj, 'y', {
+            value: 1,
+            enumerable: true,
+            writable: true,
+            configurable: true
+        });
+        // 获取特定对象，特定属性的属性描述符
+        Object.getOwnPropertyDescriptor(obj, 'x');
+        // {value: 0, writable: true, enumerable: true, configurable: true}
+        Object.getOwnPropertyDescriptor(obj, 'y');
+        // {value: 1, writable: true, enumerable: true, configurable: true}
+
+    // ****************
+
+        var obj = {_x:1};
+        Object.defineProperties(obj,{
+            y:{value:2, writable:true, enumerable:true},
+            z:{value:2, writable:true, enumerable:true},
+        /*    x:{
+                get:function(){return this._x;},
+                set:function(val){
+                    this._x = val;
+                }
+            }*/
+        });
+        Object.getOwnPropertyDescriptor(obj, 'x');
+        // {get: ƒ, set: ƒ, enumerable: false, configurable: false}
+        Object.getOwnPropertyDescriptor(obj, 'y');
+        // {value: 2, writable: true, enumerable: true, configurable: false}
+        Object.getOwnPropertyDescriptor(obj, 'z');
+        // {value: 2, writable: true, enumerable: true, configurable: false}
+// 如果Object.defineProperties中没有 _x部分
+// Object.getOwnPropertyDescriptor(obj, 'x');   ---> undefined
+    </script>
+
+    <script>
+        var o1 = {};
+        Object.defineProperty(o1, 'x', {
+            value: 1,
+            writable: true
+        });
+        // Object.create(o1) 以o1为原型对象生成一个新对象
+        // o1 做了 o2 的原型对象
+        var o2 = Object.create(o1);
+        console.log(o2.__proto__ == o1); // true
+        console.log(o2.x);  // 1
+        o2.x = 2;
+        console.log(o2.x);  // 2  自身有了x
+        delete o2.x;
+        console.log(o2.x);  // 1
+        // delete 删除属性时，只能删除自身所具有的属性，不能删除原型链上的属性
+
+        // o2.__proto__ 与 o1 是完全相同的对象引用，改其中一个，另一个也就有变化
+        o2.__proto__.x = 3;   // o2.__proto__ 相当于 o1
+        console.log(o2.x);      // 3
+        console.log(o1.x);      // 3
+
+    </script>
+    
 </body>
 
 </html>
