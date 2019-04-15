@@ -42,5 +42,6 @@ console.log(o4.x);      // 57  因为 return 56 + 1
 var a = 23;
 console.log(Object.getOwnPropertyDescriptor(window,"a"));
 // {value: 23, writable: true, enumerable: true, configurable: false}
-delete a;//等效delete window.a;     ==> false ???
+delete a;//等效delete window.a;     ==> false 
+// 删除成功返回true， 删除失败返回false
 
