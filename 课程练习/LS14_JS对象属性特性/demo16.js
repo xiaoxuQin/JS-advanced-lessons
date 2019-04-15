@@ -212,7 +212,7 @@ console.log(Object.isExtensible(empty2));   // true
 
     // 使用 Object.defineProperty方法同样会抛出 TypeError 异常
     // Object.defineProperty(obj,"ohai",{value:17});    //抛出 TypeError 异常
-    // Object.defineProperty(obj,"foo",{value:"eit"});  //抛出 TypeError 异常
+    // Object.defineProperty(obj,"foo",{value:"eit"});  //抛出 TypeError 异常 
 })();
 
 
