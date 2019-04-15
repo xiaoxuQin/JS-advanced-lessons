@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> ch15 JS原型继承 </title>
+</head>
+<body>
+</body>
+
+<script>
+    var obj = {
+        num: 1,
+        str: "hi",
+        sayHi: function () {
+            console.log(this.str);
+        }
+    };
+    var newObj = Object.create(obj);
+    console.log(newObj.__proto__ == obj);   // true
+    console.log(newObj.num);        // 1
+    newObj.sayHi();     // hi
+</script>
+<script>
+    var obj = { z: 3 };
+    console.log(obj.__proto__ == Object.prototype);
+    // true
+    console.log(obj.__proto__.__proto__);
+    // null
+    /*
+    obj.__proto__ == Object.prototype
+    Object.prototype.__proto__ == null
+    */
+
+    var obj1 = { x: 1 };
+    var obj2 = Object.create(obj1);
+    console.log(obj2.__proto__);
+    // {x: 1}
+    console.log(obj2.__proto__.__proto__);
+    // {constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
+    console.log(obj2.__proto__.__proto__.__proto__);
+    // null
+</script>
+
+<!--                        * * *         * * *         * * *            -->
+<!--                        * * *       2019.04.15      * * *            -->
+<!--                        * * *         * * *         * * *            -->
+
+<script>
+    var obj1 = { z: 1 };
+    var obj2 = Object.create(obj1);
+    console.log(obj2.__proto__);    // obj1   ==> {z: 1}
+    console.log(obj2.__proto__.__proto__);  // obj1  ==>  {constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
+    console.log(obj2.__proto__.__proto__.__proto__);     // null
+    console.log(obj1.__proto__ == Object.prototype);     // true
+</script>
+
+<script>
+    var obj1 = {
+        z: 1, sayHi: function () {
+            console.log(this.z);
+        }
+    }
+    var obj2 = Object.create(obj1);
+    obj2.z;
+    obj2.sayHi();
+</script>
+
+<script>
+    function Person(username, age) {
+        this.username = username;
+        this.age = age;
+        // this.sayHi = function(){
+        //     console.log(this.username);
+        // }
+    }
+    Person.prototype.sayHi = function () {
+        console.log(this.username);
+    }
+    var person = new Person('zhangsan', 30);
+    console.log(person.__proto__ == Person.prototype);  // true
+    person.sayHi();     // zhangsan
+
+    var person1 = new Person('lisi', 40);
+    var person2 = new Person('wangwu', 50);
+    console.log(person1.__proto__ == person.__proto__); // true
+    console.log(person1.__proto__ == Person.prototype); // true
+    // this.sayHi = function(){
+    //         console.log(this.username);
+    // }
+    // 使用这种方法，每次实例化都会添加一个方法
+    // 但如果是向构造函数添加，那么  person1.__proto__ == person2.__proto__
+    // person1 和 person2 共用一个空间,公用sayHi方法，节省内存空间
+</script>
+
+<script>
+    function Person(username, age) {
+        this.username = username;
+        this.age = age;
+    }
+    Person.prototype.sayHi = function () {
+        console.log(this.username);
+    }
+    var person = new Person('zhangsan', 30);
+    console.log(Person.prototype == person.__proto__);
+    console.log(Person.prototype.constructor == Person);
+    console.log(Person.prototype.__proto__ == Object.prototype);
+    console.log(Object.prototype.constructor == Object);
+    console.log(Object.prototype.__proto__ == null);
+    console.log(Person.prototype.constructor);
+    // ƒ Person(username, age){
+    //     this.username = username;
+    //     this.age = age;
+    // }
+
+    /*
+        Person.prototype == person.__proto__;
+        Person.prototype.constructor == Person;
+        Person.prototype.__proto__ == Object.prototype;
+        Object.prototype.constructor == Object;
+        Object.prototype.__proto__ == null;
+    */
+</script>
+
+<script>
+    // 练习 
+    // 定义一个车（car）的对象， height ， width， weight
+    // 创建一个小轿车（smallCar）的对象，继承车相关的属性，
+    // 自己具有 color， seatNum，
+    // 通过 create方法 以及 构造函数形式， 
+
+    // 001
+    var car = {
+        height: 150,
+        width: 200,
+        weight: 2000
+    };
+    var smallCar = Object.create(car);
+    // car 添加到 smallCar 的 __proto__ 上
+    smallCar.color = 'black';
+    smallCar.seatNum = 5;
+    console.log(smallCar.height);
+    console.log(smallCar.weight);
+
+    // 002
+    var car = {
+        height: 150,
+        width: 200,
+        weight: 2000
+    };
+    function createSmallCar(color, seatNum) {
+        // this.prototype = car; 
+        this.color = color;
+        this.seatNum = seatNum;
+    }
+    createSmallCar.prototype = car;
+    var smallCar2 = new createSmallCar('red', 4);
+</script>
+
+</html>
