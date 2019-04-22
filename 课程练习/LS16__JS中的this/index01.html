@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch16 _ js中的this</title>
+</head>
+<body>
+    
+</body>
+<script>    /*    一般函数中的this    */
+    // 非严格模式下，this指向window对象
+    // 严格模式下，this是undefined
+    // this是谁，取决于函数调用的主体 ###！###
+    var x = 10;
+    console.log(window.x);          // 10
+    function thisTest(){
+        console.log(this);          // window... ...
+        console.log(this === window);   // true
+    }
+    thisTest();
+
+    function thisTest1(){
+        'use strict';
+        console.log(this);  // undefined
+        return this === undefined ? true : false;   // true
+    }
+    thisTest1();
+</script>
+
+<script>    /*    对象方法中的this    */
+    var point = {
+        x:0,
+        y:0,
+        moveTo:function(x, y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+    // 直接定义在对象下的方法，调用主体就是当前对象，this指向也就是当前对象
+    // 前提没有函数嵌套关系
+    point.moveTo(10, 10);
+</script>
+
+<script>    /*    构造函数中的this    */
+    function Point(){
+        this.x = x;
+        this.y = y;
+        this.moveTo = function(x, y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+    var p = new Point(10, 10);
+    // this指向函数调用的主体
+    p.moveTo(15, 15);
+</script>
+
+<script>     /*   间接调用中的this（call、apply） */
+    var objA = {name:"AA", x:1};
+    var objB = {name:"BB", x:2};
+    function test (){
+        console.log(this.name);
+        console.log(this.x);
+    }
+    objA.fun = test;
+    objA.fun();     // AA   1
+    /*
+        方法A.call(对象)；
+        切换方法A的调用主体，this指向函数的调用主体
+    */
+    objA.fun.call(objB);    // BB  2
+    objA.fun.call(objB, 3);    
+    // 方法.call(要切换的调用对象，参数（arg1, arg2, arg3, ,,,） )
+    // 方法B.apply(要切换的调用对象， [arg1, arg2, arg3, ,,,])
+    // 与call的区别在于传入的参数是数组
+</script>
+
+<script>        /*    缺陷和解决方法     */
+// 方法一：软绑定： that = this, 进行中转
+    var point = {
+        x:0,
+        y:0,
+        moveTo:function(x,y){
+            var that = this;
+            function moveToX(x){
+        // {x: 0, y: 0, moveTo: ƒ}
+                console.log(that);   // window{...}
+                that.x = x;
+            }
+            function moveToY(y){
+        // {x: 10, y: 0, moveTo: ƒ}
+                console.log(that);   // window{...}
+                that.y = y;
+            }
+            moveToX(x);
+            moveToY(y);
+        }
+    }
+    // 对象内部的函数， 存在嵌套关系，内部函数的this指向window对象
+    point.moveTo(10, 10);
+
+    // {x: 10, y: 10, moveTo: ƒ}
+    console.log(point);  // {x: 0, y: 0, moveTo: ƒ}
+</script>
+
+<script>        /*    缺陷和解决方法     */
+// 方法二：使用call / apply 间接调用， 使得this指向正确
+    var point = {
+        x:0,
+        y:0,
+        moveTo:function(x, y){
+            function moveToX(x){
+                this.x = x;
+            }
+            function moveToY(y){
+                this.y = y;
+            }
+            // moveToX.call(point);  或
+            /*
+                切换moveToX函数的调用主体，并且执行moveToX
+            */
+            moveToX.call(this, x);
+            moveToY.call(this, y);
+        }
+    }
+    point.moveTo(10, 10);
+    console.log(point);     // {x: 10, y: 10, moveTo: ƒ}
+</script>
+
+<script>        /*    缺陷和解决方法     */
+    // 方法三：使用Function.prototype.bind， 使得this指向正确
+    var point = {
+        x: 0,
+        y: 0,
+        moveTo: function(x, y) {
+            function moveToX(x) {
+                this.x = x;
+            }
+            function moveToY(y) {
+                this.y = y; 
+            }
+            moveToX.bind(this,x)();
+            moveToY.bind(this,y)();
+            // 函数.bind(对象)  
+            // 作用：切换函数的调用主体，生成了一个新的函数，
+            // 并且是不会一直执行的
+            // 想让他立即执行，就要再加一个小括号
+            console.log(moveToX.bind(this));
+            // ƒ moveToX(x) {
+            //     this.x = x;
+            // }
+        }
+    };
+    point.moveTo(10, 10);
+    console.log(point);
+
+</script>
+
+</html>
