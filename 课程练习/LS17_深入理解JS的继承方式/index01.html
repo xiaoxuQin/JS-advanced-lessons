@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch 17</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+//  part 01  create 继承   (对象 -- 对象 原型继承)
+    var superObj = {
+        x:1,
+        y:2
+    };
+    var superObj_First = Object.create(superObj);
+    var superObj_Second = Object.create(superObj);
+    superObj_First.__proto__.x = 5;
+    console.log(superObj_Second.x); // 5
+
+    superObj_First.x = 8;
+    console.log(superObj_Second.x); // 5
+</script>
+
+<script>
+// part 02 构造函数  实现的 对象--对象 的原型继承 的原型共享问题
+    function Person(name){
+        this.name = name;
+    };
+    Person.prototype.age = 22;
+    Person.prototype.showName = function(){console.log(this.name);};
+
+    function Student(id){
+        this.id = id;
+    }
+    Student.prototype = new Person("mike");
+    /*
+        person(Student.prototype这个对象)具有以下属性：
+        name属性：mike,  
+        person.__proto__.age,
+        person.__proto__.showName
+    */
+
+    var s1 = new Student(2017001);
+    var s2 = new Student(2017002);
+    
+    console.log(s1.name, s1.age, s1.id);    // mike 22 2017001  
+    console.log(s2.name, s2.age, s2.id);    // mike 22 2017002
+    /*
+        s1自身没有age， 
+        ==>>  s1.__proto__ == Student.prototype
+            Student.prototype == new Person("mike"), person对象上没有age属性
+        ==>>  s1.__proto__.__proto__ == person.__proto__
+        person.__proto__ == Person.prototype
+    */
+
+    s1.__proto__.name = "jack";
+    console.log(s2.name);   // jack
+    console.log(s2.name);   // jack
+    s2.__proto__.__proto__.age = 99;
+    console.log(s1.age);    // 99
+    console.log(s2.age);    // 99
+</script>
+
+    <!-------------- 通过构造函数模拟类-类的继承 -------------->
+<script>
+// 模拟类-类继承的形式 一 
+    function Person(name, age){
+        this.name = name;
+        this.age = age;
+    };
+    Person.prototype.showName = function(){
+        console.log(this.name);
+    };
+
+    // name, age, id
+    function Student(name, age, id){
+        Person.call(this, name, age);
+        // call 改变调用主体，
+        // call()方法使用一个指定的this值和单独给出的一个或多个函数来调用一个函数
+        this.id = id;
+    }
+    /*
+        Person.call() 切换了Person函数内部this的指向
+    */
+
+    var s0 = new Student('xxx', 20, 2017000);
+    console.log(s0);
+    // Student {name: "xxx", age: 20, id: 2017000}
+    // __proto__:Object
+
+    // Person.prototype.showName
+    Student.prototype.__proto__ = Person.prototype;
+    var s1 = new Student('xxx', 22, 2017001);
+    var s2 = new Student('xxx', 25, 2017002);
+    console.log(s1);
+    console.log(s2);
+    /*
+        var s1 = new Student('','','');
+        s1.__proto__ == Student.prototype;
+        Student.prototype.__proto__ == Person.prortotype;
+        s1.__proto__.proto__ == Person.prototype;
+    */
+</script>
+
+<script>
+// 模拟类-类继承的形式 二
+    function Person(name, age){
+        this.name = name;
+        this.age = age;
+    };
+    Person.prototype.showName = function(){
+        console.log(this.name);
+    };
+
+    function Student(name, age, id){
+        Person.call(this, name, age);
+        this.id = id;
+    }
+    console.log(Student.prototype);
+    // 一个constructor属性指向自己； 还有一个 __proto__ 属性
+
+    /*
+        var p1 = Object.create(Person.prototype);
+        console.log(p1);
+        Student.prototype = p1;
+    */
+    Student.prototype = Object.create(Person.prototype);
+    console.log(Student.prototype);
+    // constructor属性被覆盖，只有__proto__ 属性， showName()
+
+    /*
+       自身有一个prototype， 又会有一个constructor属性，
+       改变之后 constructor属性会被覆盖，要手动添加，指向自己
+    */
+    Student.prototype.constructor = Student;
+    console.log(Student.prototype);
+    // 一个constructor属性指向自己； 
+    // 还有一个 __proto__ 属性 , 和上面被赋值的一样
+
+    var s1 = new Student("xxx", 21, 2017001);
+    var s2 = new Student("xxx", 22, 2017002);
+    
+</script>
+<!-- ------------------------------------------------------------------------------- -->
+            <!-- ---------- 2019.04.29 ----------- -->
+<script>
+    function BaseClass(){
+
+    };
+    BaseClass.fn1 = function(){
+        console.log("静态方法");
+        // 定义在构造函数上
+    }
+    BaseClass.fn1();
+
+    BaseClass.prototype.fn2 = function(){
+        console.log("原型方法");
+    }
+
+    var base = new BaseClass();
+    console.log(base.__proto__ == BaseClass.prototype); // true
+    // base.f1();   // 报错 ： base.f1 is not a function
+    base.fn2();     // 原型方法  可以调用
+</script>
+
+<script>
+    function Person(username, age){
+        this.username = username;
+        this.age = age;
+    }
+    /* *** Person.prototype.constructor == Person; *** */
+    var person = new Person("zhangsan", 20);
+    console.log(person.constructor);
+    /* *** person.constructor == Person; *** */
+
+    var obj = new Object();
+    /* *** obj.constructor == Object; *** */
+</script>
+
+</html>
