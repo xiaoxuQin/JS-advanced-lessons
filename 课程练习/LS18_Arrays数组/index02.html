@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LS_18 Arrays</title>
+</head>
+<body>
+</body>
+<script>
+    /*  
+    Array​.prototype​.for​Each()：
+        forEach(callback, thisArg);
+        callback(element, index, arr);
+            element:遍历数组每次取到的数组元素值
+            index:遍历数组每次取到的数组元素的索引 
+            arr:操作的数组
+        thisArg:可以指明回调函数内部this的指向
+    */
+    var arr1 = ['a', 'b', 'c', 'd'];
+    arr1.forEach(function(element){
+        console.log(element);
+    })
+    // a b c d
+///////////////////////////////////////////////
+    var arr1 = ['a', 'b', 'c', 'd'];
+    arr1.forEach(function(element, index, arr2){
+        console.log(element, index, arr2);
+        window.x = 10;
+    }, window)
+// a 0 ["a", "b", "c", "d"]
+// b 1 ["a", "b", "c", "d"]
+// c 2 ["a", "b", "c", "d"]
+// d 3 ["a", "b", "c", "d"]
+</script>
+
+<script>
+    /*
+    Array​.prototype​.every():
+        测试数组的所有元素是否都通过了指定函数的测试
+        全为true才会是true
+    */
+   var arr3 = [10, 20, 30, 40];
+   var result = arr3.every(function(value){
+        return value >20;
+   });
+   console.log(result);     //  false
+</script>
+
+<script>
+    /*
+    Array.prototype​.map():
+        创建一个新数组，其结果是在调用数组中的每个元素上调用提供的函数
+    */
+   var arr4 = [1,2,3,4];
+   var arr5 = arr4.map(function(element){
+       return element * 2;
+   });
+   console.log(arr5);    // [2, 4, 6, 8]
+</script>
+</html>
