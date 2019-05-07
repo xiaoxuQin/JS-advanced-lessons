@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LS_19 Date日期</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var date1 = new Date();
+    console.log(date1);     // Sun May 05 2019 08:32:03 GMT+0800 (中国标准时间)
+    var year = date1.getFullYear();
+    var month = date1.getMonth() + 1;
+    console.log(year, '   ',  month);   // 2019 "   " 5
+
+    var date2 = new Date(year, month);
+    console.log(date2);     // Wed May 01 2019 00:00:00 GMT+0800 (中国标准时间)
+
+    /////////////////////////////////////////////
+    
+    // 指明时间日期的字符串
+    var date3 = new Date("2019-05-05");
+    console.log(date3);     // Sun May 05 2019 08:00:00 GMT+0800 (中国标准时间)
+
+    // 指明一个毫秒为单位的数字类型
+    var date4 = new Date(Date.now());
+    console.log(Date.now());    // 1557016774788
+    console.log(date4);         // Sun May 05 2019 08:38:42 GMT+0800 (中国标准时间)
+</script>
+
+<script>
+    /*
+        本地时间：当前所处时区的标准时间
+        世界标准时间：UTC(格林威治时间)   GMT
+    */
+    var unixTimeZero = Date.parse('01 Jan 1970 00:00:00 GMT');
+    var javaScriptRelease = Date.parse('04 Dec 1995 00:12:00 GMT');
+    console.log(unixTimeZero);          // 0
+    console.log(javaScriptRelease);     // 818035920000
+
+    var date5 = new Date();
+    console.log(Date.parse(date5));     // 1557017509000
+
+    var seconds = Date.parse("2019-05-05");
+    console.log(seconds);               // 1557014400000
+    var date1 = new Date(seconds);      
+    console.log(date1);             // Sun May 05 2019 08:00:00 GMT+0800 (中国标准时间)
+
+    var date2 = new Date();
+    var seconds2 = Date.parse(date2);
+    console.log(seconds2 > seconds);     // true
+</script>
+
+<script>
+    /*
+    Date​.prototype​.get​Date(): 返回一个指定的日期对象为一个月中的哪一日（从1--31）
+    Date​.prototype​.getDay() : 返回一个具体日期中一周的第几天，0 表示星期天。
+    Date​.prototype​.get​Month():返回一个指定的日期对象的月份，为基于0的值（0表示一年中的第一月）。
+        月份加一！！！
+    Date​.prototype​.get​Full​Year():返回指定日期的年份。
+    Date​.prototype​.get​Hours():返回一个指定的日期对象的小时。
+    Date​.prototype​.get​Minutes():返回一个指定的日期对象的分钟数。
+    Date​.prototype​.get​Seconds():返回一个指定的日期对象的秒数。
+    */
+</script>
+
+</html>
