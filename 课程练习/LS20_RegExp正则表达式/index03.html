@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*************************     2019.05.10     ****************************/
+    /*
+        \d :[0-9]数字
+        \s :空格
+         . :任意的一个字符
+        \w :[A-Za-z0-9]
+    */
+   /*
+        [] :一个字符集， 匹配括号中任意一个
+        [^ ] :一个反向字符集， 排除括号以外的
+         ^ :匹配输入的开始
+   */
+    /*
+        量词：
+        a* :字符出现0次，多次
+        a+ :字符出现1次，多次
+        a? :字符出现0次，1次
+    */
+</script>
+
+<script>
+    /*
+        分组可以看作当前正则表达式的子规则，分组匹配得到的内容，
+        可以在exec方法调用的返回结果中查看
+        https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec
+    */
+    var reg1 = /(abc)\d/gi;
+    var str1 = 'abc1efg2abc3';
+    var result1 = reg1.exec(str1);
+    console.log(result1);
+    // ["abc1", "abc", index: 0, input: "abc1efg2", groups: undefined]
+
+    var reg2 = /(ab\d)\d/gi;
+    var str2 = 'ab31efg2abc3';
+    var result2 = reg2.exec(str2);
+    console.log(result2);
+    // ["ab31", "ab3", index: 0, input: "ab31efg2abc3", groups: undefined]
+
+    var reg3 = /(ab\d)(\def)\d/gi;
+    var str3 = 'ab31ef123';
+    var result3 = reg3.exec(str3);
+    console.log(result3);
+    // ["ab31ef1", "ab3", "1ef", index: 0, input: "ab31ef123", groups: undefined]
+
+    /*
+        exec() 方法:
+        在一个指定字符串中执行一个搜索匹配。返回一个结果数组或 null。
+    */
+</script>
+
+<script>
+    /*
+        反向引用：通过 \数字 来引用前面出现的分组
+        m表示前面出现的第几个分组
+    */
+    var reg2 = /(ss)a\1/gi;  
+    // 等效于 ： 
+    var reg3 = /(ss)a(\d)/gi;
+    var str = 'ssasss';
+    str.replace(reg2, 'X');     // Xs    
+</script>
+
+<script>
+    /*
+        String.prototype:
+        1. str.replace(正则表达式, "替换成的内容");
+        2. str.match(正则表达式) 
+            返回值是一个数组或null，
+            [整个正则匹配到的内容， 分配匹配到的内容， 开始匹配位置的索引]
+        3. str.search(正则表达式)
+            在str当中检索符合正则表达式规则的内容，如果检索到了，
+            返回其第一个字符出现的位置，如果没有则返回-1
+    */
+    var reg = /(ss)abc\d/gi;
+    var str = 'kkafd ssabc2';
+    var result = str.match(reg);
+    console.log(result);    // ["ssabc2"]
+    /*
+        RegExp.prototype:
+        1. reg.test(字符串):验证字符串是否符合正则表达式规则，返回值true或false
+        2. reg.exec(字符串)：返回值为数组
+    */
+</script>
+
+<script>
+    /* 验证压缩文件格式 */
+    var reg = /(.*)\.(rar|zip|7zip|tgz)$/;
+    /*
+        (.*) 压缩文件的名字
+          \. 对.进行转义，表示普通字符  
+        (rar|zip|7zip|tgz) 从其中任意取一个类型
+          $  以...结尾 
+    */
+
+    var reg1 = /^#[a-fA-F0-9]{6}$/;
+    /*
+        ^# 表示以#开头
+        [a-fA-F0-9] 表示集合，从其中任取一个字符 a-f A-F 0-9
+        {6} 表示之前的字符出现6次
+         $  必须要以前面的字符结尾 
+    */
+</script>
+</html>
