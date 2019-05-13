@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    try{
+        // 监听的代码块
+        throw 'error curr';
+        // var 1a = '121'; 不能以数字开头
+    }catch{
+        // 捕获到异常后的处理
+        console.log(console.error());
+        
+    }finally{
+        // 无论是否捕获异常都会执行
+    }
+</script>
+
+<!-- 
+    定义和调用都在里面，输出 RangeError: Invalid array length
+        并得到异常对象 e 
+        捕获执行过程中的异常
+    放在外面，捕获不到异常，只是定义在里面，执行在外面
+-->
+<script>
+    try{
+        function abc(x,cb){
+            console.log(x);
+            cb();
+        }
+        abc('xx', function(){
+            var arr = new Array(-1);
+        });
+    }catch(e){
+        console.log(e);
+    }
+</script>
+<script>
+    try {
+        function abc(x, cb) {
+            console.log(x);
+            cb();
+        }
+    } catch (e) {
+        console.log(e);
+    }
+    abc('xx', function () {
+        var arr = new Array(-1);
+    });
+</script>
+
+</html>
