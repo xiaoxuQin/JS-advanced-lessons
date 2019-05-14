@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">>
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list">  </ul>
+</body>
+<!-- 可以通过网站进行校验 -->
+<script>
+    /*
+        json字符串和js对象可以进行相互的转换
+        并且js对象可以很容易的渲染到页面中
+        所以可以将从后台获取到的json数据转化为js对象
+        并在页面中渲染
+    */
+    var jsObject = { "username": "zhangsan", "age": 20 };
+    var ulObject = document.getElementById("list");
+    for (var i in jsObject) {
+        var liNode = document.createElement("li");
+        liNode.innerHTML = i + " " + jsObject[i];
+        ulObject.appendChild(liNode);
+    }
+</script>
+
+<script>
+    /*
+        JSON.stringify() 方法是将一个JavaScript值(对象或者数组)转换为一个 JSON字符串
+        JSON.stringify(js对象)
+        可以将js对象数组  结构转化为json字符串
+    */
+    var jsObject = {
+        "username": "zhangsan",
+        "age": 20,
+        "address": { "add": "石家庄", "addcode": "11322" }
+    }
+    var jsonStr = JSON.stringify(jsObject);
+    console.log(jsonStr);
+    // {"username":"zhangsan","age":20,"address":{"add":"石家庄","addcode":"11322"}}
+    console.log(typeof jsonStr);    // String
+
+    /*
+        stringify的不常用参数
+    */
+    var jsonStr2 = JSON.stringify(jsObject, function (k, v) {  //键值对
+        if (typeof v == "number") {
+            // return undefined;
+            return v * 2; // "age":40,
+        }
+        return v;
+    });
+    console.log(jsonStr2);
+    // {"username":"zhangsan","address":{"add":"石家庄","addcode":"11322"}}  
+    console.log(typeof jsonStr2);   // String
+
+
+    /*
+        JSON.parse() 方法用来解析JSON字符串，构造由字符串描述的JavaScript值或对象
+        返回值是Object类型
+        转化成一个有结构的对象、数组等
+    */
+    var jsObject3 = JSON.parse(jsonStr);
+    console.log(jsObject3);
+    // {username: "zhangsan", age: 20, address: {…}}
+    console.log(typeof jsObject3);  // Object
+
+    /*
+        得到遍历的先后顺序
+    */
+    var jsObject4 = JSON.parse(jsonStr, function (k, v) {
+        console.log(k, v);
+        // 做一个遍历的操作， 键名， 键值 依次传入
+    });
+    // username zhangsan
+    // age 20
+    // add 石家庄
+    // addcode 11322
+    // address {}
+    // {}   最后一个， 键名是空字符串，键值是整个
+</script>
+
+<script>
+    /*
+        JSON.stringify(js对象)
+        可以将js对象数组  结构转化为json字符串
+        1. 作为前后端交互时，数据传输
+        2. 作为数据存储
+ 
+    */
+    [
+        {
+            "imgUrl": "img/upload/1.jpg",
+            "linkUrl": "http://www.baidu.com",
+            "descprition": "校运会"
+        },
+        {
+            "imgUrl": "img/upload/1.jpg",
+            "linkUrl": "http://www.baidu.com",
+            "descprition": "校运会"
+        },
+        {
+            "imgUrl": "img/upload/1.jpg",
+            "linkUrl": "http://www.baidu.com",
+            "descprition": "校运会"
+        },
+    ]
+</script>
+
+</html>
