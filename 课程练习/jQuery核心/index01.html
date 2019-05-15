@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+</head>
+<!-- https://www.cnblogs.com/lmyau/p/7736269.html  在线下载 -->
+<body>
+    <table width='400' height='400' border='1' align="center">
+        <tr class="even">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="odd">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="even">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="odd">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <br><br>
+    <table width='400' height='400' border='1' align="center" id="tb1">
+        <tr class="even">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="odd">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="even">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="odd">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- 引入jQuery库 -->
+<script>
+    /*
+        jQuery.min.js 压缩版的，一般用于生产环境
+        jQuery.js 未压缩，一般用于开发环境
+    */
+    /*
+        $(jquery选择器)
+    */
+    // $("#mybody").css("background", "red");
+
+    $('.even').css('background', 'red');
+    // $("td").css('background', red);
+
+    // $('#tb1 .even').css('background','red');
+    $('#tb1 td').css('background','red');
+
+    //$('#tb1>.even').css('background','red');//子节点
+</script>
+
+
+
+</html>
