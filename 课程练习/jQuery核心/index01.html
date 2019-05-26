@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jQuery</title>
+</head>
+
+<!-- https://www.cnblogs.com/lmyau/p/7736269.html  在线下载 -->
+
+<body>
+    <table width='400' height='400' border='1' align="center" id = 'tb1' >
+        <tr class="even">
+            <td class="1_1">1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr class="single">
+            <td class="1_1">5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+        </tr>
+        <tr class="even">
+            <td class="1_1">9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+        </tr>
+        <tr class="single">
+            <td class="1_1">13</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+        </tr>
+    </table>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+    /*
+        jQuery.min.js 压缩版的，一般用于生产环境
+        jQuery.js 未压缩，一般用于开发环境
+    */
+    /**********************************************
+                    $(jquery选择器)
+    ***********************************************/
+
+    // $('table').css('background', 'pink');  // 标签选择器
+    // $('tr').css('background', 'pink');  // 标签选择器
+    // $('td').css('background', 'red');  // 标签选择器
+
+
+    // $('.even').css('background', 'pink');  // 类选择器
+    // $('.single').css('background', 'purple');  // 类选择器
+
+    // $('#tb1').css('background', 'pink');  // id选择器
+
+    // $('#tb1 .even').css('background', 'pink');   // 标签 类
+    // $('#tb1 .single').css('background', 'blue');  // 标签 类
+    
+    // $('#tb1').css('background', 'pink');    // 全部变粉
+    // $('#tb1 td').css('background', 'pink'); // 边框不会变粉
+
+    // $('.even .1_1').css('background', 'pink');  // .class .class
+
+    // $('*').css('background', 'pink');  // 所有元素，整个页面在内
+    // $('tr:first').css('background', 'pink');  // 第一个tr元素
+    // $('tr:last').css('background', 'pink');  // 最后一个tr元素
+
+    // $('tr:even').css('background', 'pink');     // 所有偶数tr元素
+    // $('tr:odd').css('background', 'blue');      // 所有奇数tr元素
+    /*     * 从0开始计数 *     */
+
+    /*
+        eq(index) : 选中特定索引值的元素，索引值是index的元素
+        gt(index) : 选中索引值大于index的元素
+        lt(index) : 选中索引值小于index的元素
+        not(selector) :从特定集合中排除一些元素
+    */
+    // $('tr td:eq(2)').css('background', 'red');   // 从0开始 
+    // $('tr td:gt(2)').css('background', 'pink');     // 列出index大于2的元素
+    // $('tr td:lt(2)').css('background', 'blue');     // 列出index小于2的元素
+    // $('td:not(".1_1")').css('background', 'blue');  // 除了...   
+
+
+</script>
+
+</html> 

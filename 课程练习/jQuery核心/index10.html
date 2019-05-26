@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .imgBorder{
+            border: 10px greenyellow solid;
+        }
+    </style>
+</head>
+<body>
+    <img src="01.jpg" id = "img01" class="bg">
+    <br>
+    <button id="btn1">改变属性</button> &nbsp;&nbsp;
+    <button id="btn2">改变class</button>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+    $('#btn1').click(function(){
+        $('#img01').attr('src', '02.jpg');   // 获取/设置 属性值
+        $('#img01').attr('title', '这是一张图片');   
+        console.log($('#img01').attr('title'));  
+        // 移除特定属性
+        $('#img01').removeAttr('title'); 
+    })
+
+    $('#btn2').click(function(){
+        $('#img01').addClass('imgBorder');
+        // $('#img01').removeClass('imgBorder');
+    })
+
+    $('img').mouseover(function(){
+        $('img').addClass('imgBorder');
+    }).mouseout(function(){
+        $('img').removeClass('imgBorder');
+    })
+</script>
+<!-- 
+    1. $()      $(':eq()')      $('td:even')    $('td:odd')
+       $('td:gt(index)')        $('td:lt(index)')
+       $(':text')
+    2. mouseover()  mouseout()  blur()  focus()  click()
+    3. append()   appendTo()   after()   insertAfter()   
+       before()   insertBefore()   prepend()   prependTo()
+    4. val()   html()   css()   attr()   addClass()   removeClass() 
+ -->
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            height: 400px;
+            width: 400px;
+            background-color: rgb(253, 61, 93);
+        }
+    </style>
+</head>
+<body>
+    <div>    </div>    
+    <button id="slideup">slideup</button>
+    <button id="slidedown">slidedown</button>
+    <button id="fadein">fadein</button>
+    <button id="fadeout">fadeout</button>
+    <button id="animate1">animate1</button>
+    <button id="animate2">animate2</button>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+    /*改变元素的高度，来切换显示和隐藏*/
+    $('#slideup').click(function(){
+        $('div').slideUp(3000);
+    })
+    $('#slidedown').click(function(){
+        $('div').slideDown(3000);
+    })
+
+    /*改变元素的透明度，来切换显示和隐藏*/
+    $('#fadein').click(function(){
+        $('div').fadeIn(3000);
+    })
+    $('#fadeout').click(function(){
+        $('div').fadeOut(3000);
+    })
+
+    $('#animate1').click(function(){
+        $('div').animate({
+            'margin-left':'700px'
+        }, 7000);
+    });
+    $('#animate2').click(function(){
+        $('div').animate({
+            'margin-left':'0px'
+        }, 7000);
+    });
+
+
+</script>
+
+</html>

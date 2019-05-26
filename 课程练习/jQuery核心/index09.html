@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>用户名</td>
+            <td>
+                <input type="text" name="username" id="username">
+                <span class="error"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td>
+                <input type="password" name="pwdd">
+                
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" value="登录">
+            </td>
+        </tr>
+    </table>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    /*
+        val()  用于设置或者获取表单元素的val值
+        html() 用于设置或获取 双标记标签  元素内部的html内容
+        css()  用于设置选中元素的样式 css('样式名' : '样式值')
+        css({'样式名': '样式值'})  
+    */
+    $('#username').blur(function(){
+        var inputVal = $(this).val();  // 相当于 this.value
+        if(inputVal == ''){
+            $('.error').html('用户名不能为空');      // 标签里面的内容
+            // $('.error').css('color', 'red');
+            // $('.error').css('font-size', '30px');
+            // 以对象的形式设置多个样式
+            $('.error').css({
+                'color': 'blue',
+                'font-size': '30px'
+            });
+        }else{
+            $(".error").remove();
+        }
+    })
+</script> 
+
+</html>

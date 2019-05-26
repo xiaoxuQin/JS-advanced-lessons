@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container{
+            width: 600px;
+            height: 300px;
+            border: 1px red solid;
+        }
+        #btnlist{
+            width:300px;
+            margin: 0 auto;
+        }
+        img{
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img src="01.jpg" alt="" id="img01">
+    </div>
+    <div id="btnlist">
+        <button id="after"> after </button>
+        <button id="insertAfter"> insertAfter </button>
+        <button id="before"> before </button>
+        <button id="insertBefore"> insertBefore </button>
+    </div>
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+    /*
+        after():在匹配的元素之后插入内容
+        insertAfter():把匹配的元素插入到另一个指定的元素集合的后面
+        before():在每个匹配的元素之前插入内容
+        insertBefore():把匹配的元素插入到另一个指定的元素集合的前面
+    
+        1.向特定的元素后面插入新的节点， after()   insertAfter
+        2.向特定元素的前面插入新的节点， before()  insertBefore()
+        3.向特定元素标签内部最后的位置添加新的节点  append()  appendTo
+        4.向特定元素标签内部最前的位置添加新的节点  prepend()  prependTo()
+    */
+    $('#after').click(function(){
+        var $img02 = $('<img src = "02.jpg">');
+        $('#img01').after($img02);
+        /* 图2插在图1后面 */
+        // $(this).append(img1);
+    })
+
+    $('#insertAfter').click(function(){
+        var $img02 = $('<img src = "02.jpg">');
+        $img02.insertAfter($('#img01'));
+        /* 图2插在图1后面 */
+    })
+
+    $('#before').click(function(){
+        var $img02 = $('<img src = "02.jpg">');
+        $('#img01').before($img02);
+        /* 图2插在图1前面 */
+    })
+
+    $('#insertBefore').click(function(){
+        var $img02 = $('<img src = "02.jpg">');
+        $img02.insertBefore($('#img01'));
+        /* 图2插在图1前面 */
+    })
+
+</script> 
+</html>
