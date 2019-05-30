@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+
+<script>
+    /* let 声明的变量会拥有块级作用域{} */
+    let username = 'zhangsan';
+    if (true) {
+        let username = 'lisi';
+        console.log(username);  // lisi
+    }
+    console.log(username);  // zhangsan
+</script>
+
+<script>
+    /*
+        之前var声明变量的方式，只有一个全局变量i;所有的延迟执行都在共用一个i
+        let声明的方式，每次循环都会形成自己的一个独立作用域
+    */
+    for (let i = 0; i < 3; i++) {
+        setTimeout(function () {
+            console.log(new Date(), i);
+        }, i * 5000)
+    }           //  0  1  2
+</script>
+
+<script>
+    /* 
+        const 声明的变量不可修改;
+        const 定义变量时，必须进行初始化赋值
+    */
+    const PI = 3.1415926;
+    PI = 3.1212121;
+    // 报错 Assignment to constant variable.
+
+    const sex;
+    //  Missing initializer in const declaration
+</script>
+
+<script>
+    /*
+        const指向的对象引用不可变，但其属性是可变的
+    */
+    const obj = {x:1, y:2}
+    obj.x = 5;
+    console.log(obj.x); // 5
+</script>
+
+<script>
+    /* 
+        let声明的变量， 在声明之前不可用， 不会进行变量提升
+    */
+    console.log(username);
+    let username = 'lisi';
+    // username is not defined
+
+    let username = 'lisi';
+    console.log(username);  // lisi
+</script>
+
+<script>
+    /*
+        var可以声明重名变量，let和const则不可以
+    */
+    function foo(){
+        let x;
+        let x;
+    }
+    foo();
+    // Identifier 'x' has already been declared
+</script>
+
+</html>
