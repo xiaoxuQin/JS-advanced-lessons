@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div1{
+            width: 400px;
+            height: 400px;
+            background:rgb(253, 191, 191);
+            margin: 0 auto;
+        }
+        #div2{
+            width: 300px;
+            height: 300px;
+            background:rgb(144, 144, 236);
+            margin: 0 auto;
+        }
+        #div3{
+            width: 150px;
+            height: 150px;
+            background:rgb(110, 252, 164);
+            margin: 0 auto;
+        }
+        #div4{
+            width: 80px;
+            height: 80px; 
+            background:rgb(255, 242, 127);
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">1
+        <div id="div2">2
+            <div id="div3">3
+                <div id="div4">4</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    /*
+        事件的冒泡和捕获
+        冒泡：冒泡处理过程，从内往外依次触发事件
+        捕获：事件捕获的处理过程，从外往内依次触发事件
+
+        e.target：事件最根源的触发对象，最里面的元素
+        e.currentTarget：当前触发事件的DOM对象
+    */
+    var div1 = document.getElementById('div1');
+    var div2 = document.getElementById('div2');
+    var div3 = document.getElementById('div3');
+    var div4 = document.getElementById('div4');
+    div1.addEventListener('click',function(e){
+        // console.log('div1.target:');
+        // console.log(e.target);
+        // console.log('div1.currentTarget:');
+        // console.log(e.currentTarget);
+        console.log('div1 clicked');
+    }, true)
+    div2.addEventListener('click',function(e){
+        // console.log('div2.target:');
+        // console.log(e.target);
+        // console.log('div2.currentTarget:');
+        // console.log(e.currentTarget);
+        console.log('div2 clicked');
+    }, true)
+    /*
+        没有 true 先触发2，再触发1
+        加了 true 先触发1，再触发2
+        默认 参数为 false  
+    */
+
+    div3.addEventListener('click',function(e){
+        // console.log('div3.target:');
+        // console.log(e.target);
+        // console.log('div3.currentTarget:');
+        // console.log(e.currentTarget);
+        console.log('div3 clicked');
+    }, true)
+    /*
+        false 冒泡的顺序
+        true  捕获的顺序
+    */
+
+    div4.addEventListener('click',function(e){
+        /* 阻止冒泡和捕获，不希望触发外层 */
+        e.stopPropagation(); 
+        console.log('div4.target:');
+        console.log(e.target);
+        console.log('div4.currentTarget:');
+        console.log(e.currentTarget);
+        console.log('div4 clicked');
+        
+        console.log(e.bubbles);
+        /* e.bubbles  获取是否为冒泡 冒泡的，返回true 否则返回false */
+
+        console.log(e.cancelable);
+        /*
+            e.cancelable 表明该事件是否可以被取消默认行为
+            如果该事件可以用 preventDefault() 可以阻止与事件关联的默认行为，
+            则返回 true，否则为 false
+        */
+
+        console.log(e.cancelBubble);
+        /* e.cancelBubble 等效于 stopPropagation()  true  false */
+
+    }, false)
+    
+
+</script>
+</html>
