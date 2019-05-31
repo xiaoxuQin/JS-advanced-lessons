@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ch 28 (2)</title>
+</head>
+<body> 
+</body>
+<script>
+    /*   交换变量（写法简洁，语义清晰）   */
+    let [x, y] = ['a', 'b'];
+    console.log(x, y);  // a b
+    [y, x] = [x, y];
+    console.log(x, y);  // b a
+</script>
+
+<script>
+    /*   从函数中返回多个值   */
+    function example(){
+        return [1,2,3];
+    }
+    let [a,b,c] = example();
+    console.log(a,b,c); // 1 2 3
+</script>
+
+<script>
+    /*   提取JSON数据   */
+    let json1 = {
+        'username': 'zhangsan',
+        'courseList': ['math', 'English'],
+        'age': 20
+    }
+    /*
+        JSON,  MATH 都是对象，没有构造函数
+        JSON.parse();
+    */
+    let jsonStr = JSON.stringify(json1);
+    console.log(jsonStr);
+    json1 = JSON.parse(jsonStr);
+
+    let {username} = json1;
+    console.log(username);  // zhangsan
+</script>
+</html>
