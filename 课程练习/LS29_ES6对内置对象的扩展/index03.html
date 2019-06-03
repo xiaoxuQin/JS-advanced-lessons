@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+            /*
+                对Object的扩展
+            */
+
+    /*
+        ES6对象结构的简化：
+        属性可以写成变量的形式，不要求必须写键值对；
+        函数可以省略 'function'，函数名(){}
+    */
+    let username = 'lily';
+    let obj = {
+        username,
+        fn1(){
+            console.log(this.username);
+        }
+    }
+</script>
+
+<script>
+    let bar = 'foo';
+    let obj1 = {
+        [bar]:'male'    // 做变量
+    }
+    console.log(obj1);  // {foo: "male"}
+
+    /*
+        Object.assign() 
+        将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
+    */
+    let obj2 = {username:'zhangsan'};
+    let obj3 = {age: 20};
+    console.log(Object.assign(obj2, obj3));     // {username: "zhangsan", age: 20}
+    console.log(Object.keys(obj2));
+    console.log(Object.values(obj2));
+    console.log(Object.entries(obj2));
+</script>
+</html>
